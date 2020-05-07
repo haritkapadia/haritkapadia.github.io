@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>Harit Kapadia</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Arimo&family=Inconsolata:wght@400;700;900&family=Zilla+Slab&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="/style.css">
+    <script type="text/javascript">
+      const elems = [];
+      function checkVisible(elm) {
+          var rect = elm.getBoundingClientRect();
+          var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+          return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+      }
+      function show(elID) {
+          const el = document.getElementById(elID);
+          el.style.display = 'block';
+      }
+      window.onscroll = function() {
+          for(let i = 0; i < elems.length; i++)
+              if(!checkVisible(elems[i]))
+                  if(elems[i].style.display != 'none')
+                      elems[i].style.display = 'none';
+      }
+    </script>
+    <script src="/canvas.js"></script>
+    <style>
+      .canvas {
+          height: 100%;
+          width: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          z-index: -100;
+          overflow: hidden;
+      }
+    </style>
+  </head>
+  <body style="height: 100%;">
+    <div class="topic" id="frontPage">
+      <div class="canvas">
+        <canvas id="frontcanvas" width="200" height="100"></canvas>
+        <script>doCanvas();</script>
+      </div>
+      <div class="row">
+        <h1>Hello! My name is Harit&nbsp;Kapadia.</h1>
+        <p>I program.</p>
+        <div class="toc">
+          <ul>
+            <li><a href="/static/resume.pdf">See and print my resume</a></li>
+            {{#each topics}}
+            <li>
+              <a href="{{strcat "#" this.id}}" onclick="show('{{strcat "fromMenu" this.id}}')">{{this.menuText}}</a>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    {{#each topics}}
+    <div class="topic" id="{{this.id}}">
+      <div class="heading">
+        <h1>{{this.title}}</h1>
+        <div class="clickText" id="{{strcat "fromMenu" this.id}}">{{this.clickText}}</div>
+        <script>
+          elems.push(document.getElementById('{{strcat "fromMenu" this.id}}'));
+        </script>
+      </div>
+      {{{this.contentHTML}}}
+    </div>
+    {{/each}}
+  </body>
+</html>

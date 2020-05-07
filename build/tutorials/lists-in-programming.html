@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>Harit Kapadia - Tutorials</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['\\(','\\)']]}});
+    </script>
+    <link rel="stylesheet" href="/style.css">
+
+    <style>
+      .section-number {
+          display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="topbar" href="/index.html">
+      <div>HK</div>
+    </a>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <h1>Lists in Programming</h1>
+
+        </div>
+    </div>
+    <div class="row">
+      <div class="toc col-1"><ul><li><a href="#header-1"><span class="section-number">1</span>Adding elements</a></li>
+<li><a href="#header-2"><span class="section-number">2</span>Removing elements</a></li>
+<li><a href="#header-3"><span class="section-number">3</span>Accessing elements</a></li>
+<li><a href="#header-4"><span class="section-number">4</span>Modifying elements</a></li>
+<li><a href="#header-5"><span class="section-number">5</span>Uses</a></li>
+</ul>
+</div>
+      <div class="content col-2"> <p>Lists are an important concept in programming. A list is an ordered collection of objects. There are three main operations that can be performed on a list: adding elements; removing elements; accessing elements; modifying elements. Java has a List interface, and an implementation of the interface with the ArrayList class.</p>
+<h2 id="header-1"><span class="section-number">1</span>Adding elements</h2>
+<p>Consider a list \( [2, 3] \). An element can be inserted at the beginning, end, or in the middle of the list: \( [e, 2, e, 3, e] \). Notice that adding an element to the list increases the size of a list. In Java, elements can be inserted into an ArrayList as follows.</p>
+<pre class="prettyprint"><code class="language-java">list.add(0, e);
+list.add(2, e);
+list.add(e);</code>
+</pre>
+<p>Note that in the last line, <code>add(e)</code> adds an element to the end of the ArrayList.</p>
+<h2 id="header-2"><span class="section-number">2</span>Removing elements</h2>
+<p>Consider a list \( [e, 2, e, 3, e] \). An element can be removed from the beginning, end, or the middle of the list: \( [2, e] \). Notice that removing an element from the list reduces the size of the list. In Java, elements can be removed from an ArrayList as follows.</p>
+<pre class="prettyprint"><code class="language-java">list.remove(1); // remove by index
+list.remove(e); // remove element
+list.removeAll(otherList); // remove list of elements</code>
+</pre>
+<h2 id="header-3"><span class="section-number">3</span>Accessing elements</h2>
+<p>A list is usually useless unless elements of the list are accessible. An element can be accessed to find its value. Consider the list \( [2, 3, 4] \). The value of the second element in the list is \( 3 \). In Java, elements of a list can be accessed as follows.</p>
+<pre class="prettyprint"><code class="language-java">Object e = list.get(2);</code>
+</pre>
+<h2 id="header-4"><span class="section-number">4</span>Modifying elements</h2>
+<p>Elements of a list may be modified. Consider the list \( [2, 3, 4] \). If the value of the last element is changed to \( 100 \), the resulting list is \( [2, 3, 100] \). In Java, elements of an ArrayList can be modified as follows.</p>
+<pre class="prettyprint"><code class="language-java">list.set(1, new Object());</code>
+</pre>
+<h2 id="header-5"><span class="section-number">5</span>Uses</h2>
+<p>Lists are much more flexible than arrays and are much more expressive to use in code. Additionally, arrays are simply a type of list that can only access and modify elements, meaning that every programmer uses lists at some point.</p>
+ </div>
+    </div>
+  </body>
+</html>

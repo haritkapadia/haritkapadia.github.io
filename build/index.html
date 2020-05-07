@@ -1,0 +1,262 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>Harit Kapadia</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Arimo&family=Inconsolata:wght@400;700;900&family=Zilla+Slab&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="/style.css">
+    <script type="text/javascript">
+      const elems = [];
+      function checkVisible(elm) {
+          var rect = elm.getBoundingClientRect();
+          var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+          return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+      }
+      function show(elID) {
+          const el = document.getElementById(elID);
+          el.style.display = 'block';
+      }
+      window.onscroll = function() {
+          for(let i = 0; i < elems.length; i++)
+              if(!checkVisible(elems[i]))
+                  if(elems[i].style.display != 'none')
+                      elems[i].style.display = 'none';
+      }
+    </script>
+    <script src="/canvas.js"></script>
+    <style>
+      .canvas {
+          height: 100%;
+          width: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          z-index: -100;
+          overflow: hidden;
+      }
+    </style>
+  </head>
+  <body style="height: 100%;">
+    <div class="topic" id="frontPage">
+      <div class="canvas">
+        <canvas id="frontcanvas" width="200" height="100"></canvas>
+        <script>doCanvas();</script>
+      </div>
+      <div class="row">
+        <h1>Hello! My name is Harit&nbsp;Kapadia.</h1>
+        <p>I program.</p>
+        <div class="toc">
+          <ul>
+            <li><a href="/static/resume.pdf">See and print my resume</a></li>
+            <li>
+              <a href="#projects" onclick="show('fromMenuprojects')">Tinker with my projects</a>
+            </li>
+            <li>
+              <a href="#literature" onclick="show('fromMenuliterature')">Read my fine literature</a>
+            </li>
+            <li>
+              <a href="#interact" onclick="show('fromMenuinteract')">Interact with me online</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic" id="projects">
+      <div class="heading">
+        <h1>My Projects</h1>
+        <div class="clickText" id="fromMenuprojects">My babies! My precious, beautiful babies!</div>
+        <script>
+          elems.push(document.getElementById('fromMenuprojects'));
+        </script>
+      </div>
+      <div class="infoframe">
+  <a href="https://github.com/narilth/bhrg" class="infobox">
+    <div>
+      <h1>BHRG</h1>
+      <div class="imagebox-16-9">
+        <img alt="A red block shoots at white circles. The white circles have health bars above them. Various polygons are visible in the background." src="/static/bhrg.jpg"/>
+      </div>
+      <p>Work in progress bullet hell rhythm game. Enemy actions are synced to music. Built with SDL2.</p>
+    </div>
+  </a>
+  <a href="https://floundernews.github.io/" class="infobox">
+    <div>
+      <h1>The Flounder</h1>
+      <div class="imagebox-16-9">
+        <img alt="A hand-drawn image of a flounder. Flounders are flat fish that have both eyes on the same side of their body." src="/static/FinalClubLogo_Flounder.png"/>
+      </div>
+      <p>A satirical school newspaper that publishes online and in print.</p>
+    </div>
+  </a>
+  <a href="https://github.com/narilth/36daysgame" class="infobox">
+    <div>
+      <h1>36 Days - Survival Game</h1>
+      <div class="imagebox-16-9">
+        <img alt="A wilderness scene consisting of some trees, different flowers, and two ponds surrounded by cattail is whown from above. A character stands by a pond with a fire. A small shelter with a bed is shown nearby. A pile of wood is near the shelter." src="/static/36daysgame.png"/>
+      </div>
+      <p>Educational role-playing game designed to educate youth on surviving in the wilderness. It is open-world and quest-driven. Built with JavaFX and J3D Texture.</p>
+    </div>
+  </a>
+  <a href="https://github.com/narilth/urge-purge" class="infobox">
+    <div>
+      <h1>Urge Purge</h1>
+      <div class="imagebox-16-9">
+        <img alt="A website page is shown. The top bar informs that this is a landing page. A dropdown to edit lists is also present. The page is titled Urge Purge: Stop that site or program from hurting your productivity! An image of a man viewing a computer is beside the title. A Getting Started section is visible below the title." src="/static/urgepurge.jpg"/>
+      </div>
+      <p>An impulse blocker that makes you think twice about using addictive sites and programs. Made for Hack The Hammer II. Built with PyQT5, Bootstrap, HttpProxy, and Express.</p>
+    </div>
+  </a>
+  <a href="https://github.com/advenia/LIP" class="infobox">
+    <div>
+      <h1>Location-based Information Provider</h1>
+      <div class="imagebox-16-9">
+        <img alt="" src="/static/lip.png"/>
+      </div>
+      <p>Gives tourists suggestions of nearby events based on data from previous tourists and landmark data. Made for Hack The North 2019. Built with Android Studio, Google Maps Places API, Django, and Numpy.</p>
+    </div>
+  </a>
+  <a href="https://github.com/starfy84/PCTeacher" class="infobox">
+    <div>
+      <h1>PCTeacher</h1>
+      <div class="imagebox-16-9">
+        <img alt="A practice math problem is shown for adding two numbers: &quot;9 apples + 4 apples &#x3D; 13 apples&quot;. Below the example is a prompt to solve three math problems. The math problem displayed is &quot;8 + 10 &#x3D; ?&quot;" src="/static/pcteacher.png"/>
+      </div>
+      <p>An online teaching assistant with automatic question generation and learning type adaptation. Made for PC Hacks 2019, third place winner. Built with Django, Bootstrap, and Jinja.</p>
+    </div>
+  </a>
+  <a href="https://github.com/narilth/newgrounds-user-download" class="infobox">
+    <div>
+      <h1>Newgrounds User Scraper</h1>
+      <div class="imagebox-16-9">
+        <img alt="" src="/static/newgrounds-scraper.png"/>
+      </div>
+      <p>Scraper that downloads the content of a Newgrounds user. Built with Selenium Webdriver, Request, and Cheerio.</p>
+    </div>
+  </a>
+  <a href="https://github.com/narilth/fakecmd" class="infobox">
+    <div>
+      <h1>fakecmd</h1>
+      <div class="imagebox-16-9">
+        <img alt="" src="/static/fakecmd.png"/>
+      </div>
+      <p>A replacement Command Prompt for Windows for computers that have Command Prompt disabled. Made using Batch.</p>
+    </div>
+  </a>
+  <a href="https://github.com/narilth/smouse" class="infobox">
+    <div>
+      <h1>Smouse</h1>
+      <div class="imagebox-16-9">
+        <img alt="" src="/static/smouse.png"/>
+      </div>
+      <p>An app that controls a computer&#x27;s mouse using the phone&#x27;s accelerometer. Built with Android Studio.</p>
+    </div>
+  </a>
+</div>
+
+    </div>
+    <div class="topic" id="literature">
+      <div class="heading">
+        <h1>My Literature</h1>
+        <div class="clickText" id="fromMenuliterature">Back in my day, we had no websites. Nay, we read books like real intellectuals.</div>
+        <script>
+          elems.push(document.getElementById('fromMenuliterature'));
+        </script>
+      </div>
+      <div class="infoframe">
+  <a href="/tutorials/lists-in-programming.html" class="infobox">
+    <div>
+      <h1>Lists in Programming</h1>
+      <div class="imagebox-16-9">
+        <img alt="" src="/static/lists-in-programming.png"/>
+      </div>
+      <p>Lists are an important concept in programming. A list is an ordered collection of objects. There are three main operations that can be performed on a list: adding elements; removing elements; accessing elements; modifying elements.</p>
+    </div>
+  </a>
+  <a href="/tutorials/principles-of-recursion.html" class="infobox">
+    <div>
+      <h1>Principles of Recursion</h1>
+      <div class="imagebox-16-9">
+        <img alt="" src="/static/principles-of-recursion.png"/>
+      </div>
+      <p>Recursion is a strategy of solving problems that involves nested and repeated code, often through the use of functions. It is used to solve problems that contain smaller versions of themselves.</p>
+    </div>
+  </a>
+  <a href="/tutorials/noncomparative-sorting.html" class="infobox">
+    <div>
+      <h1>Noncomparative Sorting</h1>
+      <div class="imagebox-16-9">
+        <img alt="" src="/static/noncomparative-sorting.png"/>
+      </div>
+      <p>Noncomparative sorting uses the properties of numbers to rearrange lists, making it more efficient than comparisons in certain cases.</p>
+    </div>
+  </a>
+  <a href="/tutorials/object-oriented-programming.html" class="infobox">
+    <div>
+      <h1>Object Oriented Programming</h1>
+      <div class="imagebox-16-9">
+        <img alt="" src="/static/object-oriented-programming.png"/>
+      </div>
+      <p>Object-oriented programming has become the most popular programming paradigm in the last few years. By understanding its core concepts well, one can greatly improve their understanding of many languages.</p>
+    </div>
+  </a>
+</div>
+
+    </div>
+    <div class="topic" id="interact">
+      <div class="heading">
+        <h1>Me Online</h1>
+        <div class="clickText" id="fromMenuinteract">I can&#x27;t wait to meet you too!</div>
+        <script>
+          elems.push(document.getElementById('fromMenuinteract'));
+        </script>
+      </div>
+      <div class="interactFrame infoframe">
+  <a href="mailto:kapadiaharit@hotmail.com" class="infobox">
+    <div class="social">
+      <div class="imagebox-1-1">
+        <img alt="Mail" src="/static/email.png"/>
+      </div>
+      <div class="socialHandle">kapadiaharit@hotmail.com</div>
+    </div>
+  </a>
+  <a href="https://github.com/narilth" class="infobox">
+    <div class="social">
+      <div class="imagebox-1-1">
+        <img alt="Github" src="/static/GitHub-Mark-120px-plus.png"/>
+      </div>
+      <div class="socialHandle">@narilth</div>
+    </div>
+  </a>
+  <a href="https://devpost.com/haritkapadia" class="infobox">
+    <div class="social">
+      <div class="imagebox-1-1">
+        <img alt="Devpost" src="/static/devpost-logo.png"/>
+      </div>
+      <div class="socialHandle">haritkapadia</div>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/in/harit-kapadia/" class="infobox">
+    <div class="social">
+      <div class="imagebox-1-1">
+        <img alt="Linkedin" src="/static/linkedin.png"/>
+      </div>
+      <div class="socialHandle">Harit Kapadia</div>
+    </div>
+  </a>
+  <a href="https://instagram.com/haritkapadia" class="infobox">
+    <div class="social">
+      <div class="imagebox-1-1">
+        <img alt="Instagram" src="/static/instagram-glyph-logo_May2016.png"/>
+      </div>
+      <div class="socialHandle">@haritkapadia</div>
+    </div>
+  </a>
+</div>
+
+    </div>
+  </body>
+</html>

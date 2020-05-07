@@ -1,0 +1,74 @@
+{
+    "priority": 1,
+    "menuText": "Tinker with my projects",
+    "title": "My Projects",
+    "clickText": "My babies! My precious, beautiful babies!",
+    "content": {
+        "file": "projects.html",
+        "projects": [
+            {
+                "title": "BHRG",
+                "link": "https://github.com/narilth/bhrg",
+                "image": "/static/bhrg.jpg",
+                "altText": "A red block shoots at white circles. The white circles have health bars above them. Various polygons are visible in the background.",
+                "description": "Work in progress bullet hell rhythm game. Enemy actions are synced to music. Built with SDL2."
+            },
+            {
+                "title": "The Flounder",
+                "link": "https://floundernews.github.io/",
+                "image": "/static/FinalClubLogo_Flounder.png",
+                "altText": "A hand-drawn image of a flounder. Flounders are flat fish that have both eyes on the same side of their body.",
+                "description": "A satirical school newspaper that publishes online and in print."
+            },
+            {
+                "title": "36 Days - Survival Game",
+                "link": "https://github.com/narilth/36daysgame",
+                "image": "/static/36daysgame.png",
+                "altText": "A wilderness scene consisting of some trees, different flowers, and two ponds surrounded by cattail is whown from above. A character stands by a pond with a fire. A small shelter with a bed is shown nearby. A pile of wood is near the shelter.",
+                "description": "Educational role-playing game designed to educate youth on surviving in the wilderness. It is open-world and quest-driven. Built with JavaFX and J3D Texture."
+            },
+            {
+                "title": "Urge Purge",
+                "link": "https://github.com/narilth/urge-purge",
+                "image": "/static/urgepurge.jpg",
+                "altText": "A website page is shown. The top bar informs that this is a landing page. A dropdown to edit lists is also present. The page is titled Urge Purge: Stop that site or program from hurting your productivity! An image of a man viewing a computer is beside the title. A Getting Started section is visible below the title.",
+                "description": "An impulse blocker that makes you think twice about using addictive sites and programs. Made for Hack The Hammer II. Built with PyQT5, Bootstrap, HttpProxy, and Express."
+            },
+            {
+                "title": "Location-based Information Provider",
+                "link": "https://github.com/advenia/LIP",
+                "image": "/static/lip.png",
+                "altText": "",
+                "description": "Gives tourists suggestions of nearby events based on data from previous tourists and landmark data. Made for Hack The North 2019. Built with Android Studio, Google Maps Places API, Django, and Numpy."
+            },
+            {
+                "title": "PCTeacher",
+                "link": "https://github.com/starfy84/PCTeacher",
+                "image": "/static/pcteacher.png",
+                "altText": "A practice math problem is shown for adding two numbers: \"9 apples + 4 apples = 13 apples\". Below the example is a prompt to solve three math problems. The math problem displayed is \"8 + 10 = ?\"",
+                "description": "An online teaching assistant with automatic question generation and learning type adaptation. Made for PC Hacks 2019, third place winner. Built with Django, Bootstrap, and Jinja."
+            },
+            {
+                "title": "Newgrounds User Scraper",
+                "link": "https://github.com/narilth/newgrounds-user-download",
+                "image": "/static/newgrounds-scraper.png",
+                "altText": "",
+                "description": "Scraper that downloads the content of a Newgrounds user. Built with Selenium Webdriver, Request, and Cheerio."
+            },
+            {
+                "title": "fakecmd",
+                "link": "https://github.com/narilth/fakecmd",
+                "image": "/static/fakecmd.png",
+                "alttext": "A Command Prompt like terminal that shows the execution of the \"ping\" command.",
+                "description": "A replacement Command Prompt for Windows for computers that have Command Prompt disabled. Made using Batch."
+            },
+            {
+                "title": "Smouse",
+                "link": "https://github.com/narilth/smouse",
+                "image": "/static/smouse.png",
+                "altText": "",
+                "description": "An app that controls a computer's mouse using the phone's accelerometer. Built with Android Studio."
+            }
+        ]
+    }
+}

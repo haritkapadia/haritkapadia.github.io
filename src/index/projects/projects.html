@@ -1,0 +1,13 @@
+<div class="infoframe">
+  {{#each content.projects}}
+  <a href="{{this.link}}" class="infobox">
+    <div>
+      <h1>{{this.title}}</h1>
+      <div class="imagebox-16-9">
+        <img alt="{{this.altText}}" src="{{this.image}}"/>
+      </div>
+      <p>{{this.description}}</p>
+    </div>
+  </a>
+  {{/each}}
+</div>

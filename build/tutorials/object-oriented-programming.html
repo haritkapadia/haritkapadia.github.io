@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>Harit Kapadia - Tutorials</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['\\(','\\)']]}});
+    </script>
+    <link rel="stylesheet" href="/style.css">
+
+    <style>
+      .section-number {
+          display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="topbar" href="/index.html">
+      <div>HK</div>
+    </a>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-2">
+        <h1>The Three Principles of Object-Oriented Programming</h1>
+
+        </div>
+    </div>
+    <div class="row">
+      <div class="toc col-1"><ul><li><a href="#header-1"><span class="section-number">1</span>Encapsulation</a></li>
+<li><a href="#header-2"><span class="section-number">2</span>Inheritance</a></li>
+<li><a href="#header-3"><span class="section-number">3</span>Polymorphism</a></li>
+</ul>
+</div>
+      <div class="content col-2"> <p>Object-oriented programming has become the most popular programming paradigm in the last few years. By understanding its core concepts well, one can greatly improve their understanding of many languages. The three principles of object-oriented programming are encapsulation, inheritance, and polymorphism.</p>
+<h2 id="header-1"><span class="section-number">1</span>Encapsulation</h2>
+<p>Encapsulation is the process of containing private data in an object, and modifying the data using public methods. By containing the data that the user of of the object would like to modify, undefined behaviour is prevented and minimised. Below is an example of encapsulation.</p>
+<pre class="prettyprint"><code class="language-java">  public class Capsule {
+      private String name;
+      private double quantity;
+      private boolean broken;
+
+      Capsule(String name, double quantity) {
+          this.name = name;
+          this.quantity = quantity;
+          this.broken = false;
+      }
+
+      public void break() {
+          quantity = 0;
+          broken = true;
+      }
+
+      public double getQuantity() {
+          return quantity;
+      }
+
+      public boolean isBroken() {
+          return broken;
+      }
+  }</code>
+</pre>
+<p>In the example above, the <code>Capsule</code> class represents a capsule with a name, a quantity of medication, and a state of being broken.
+By preventing the data of the <code>Capsule</code> from being modified, one prevents illogical actions from being performed, such as changing the <code>name</code> of the <code>Capsule</code>.
+Additionally, by containing data changes in methods, it is ensured that every required data change is made when an action is performed. This can be seen in the <code>break()</code> method, where the &#60;span class=&#34;code&#34;&#62;quantity&#60;/span&#62; of the capsule is set to &#60;span class=&#34;code&#34;&#62;0&#60;/span&#62; and the state of &#60;span class=&#34;code&#34;&#62;broken&#60;/span&#62; is set to &#60;span class=&#34;code&#34;&#62;true&#60;/span&#62;. If it was up to the programmer to make these changes to signify breaking the <code>Capsule</code>, it is possible that they may forget to make one of these changes.</p>
+<h2 id="header-2"><span class="section-number">2</span>Inheritance</h2>
+<p>Inheritance is the sharing of attributes between classes. Specifically, a class can inherit methods and fields from a different class. Some languages like Java enforce inheritance from one class, while others such as C++ support inheriting from multiple classes. Below is an example of single inheritance.</p>
+<pre class="prettyprint"><code class="language-java">  public class Parent {
+      private String name;
+      private Calendar birthDate;
+      private double netWorth;
+
+      public Parent(String name, Calendar birthDate) {
+          this.name = name;
+          this.birthDate = birthDate;
+          netWorth = 0;
+      }
+
+      public void work(double hours) {
+          netWorth += 14 * hours;
+      }
+  }
+
+  public class Child extends Parent {
+      private double happinessMeter;
+
+      public Child(String name, Calendar birthDate) {
+          super(name, birthDate);
+          happinessMeter = 0;
+      }
+
+      public void play(double hours) {
+          happinessMeter += 1.75 * hours;
+      }
+
+      public void idle(double hours) {
+          happinessMeter -= 0.5 * hours;
+      }
+  }</code>
+</pre>
+In the example above, there are two classes, the <code>Parent</code> and the <code>Child</code>.The <code>Parent</code> can has a <code>name</code>, a <code>birthDate</code>, and a <code>netWorth</code>. The <code>Parent</code> can <code>work()</code> to increase their <code>netWorth</code>.The Child class is inherits the methods of the <code>Parent</code>, meaning the child also has a <code>name</code>, a <code>birthDate</code>, and a <code>netWorth</code>. The child can also <code>work()</code>. What is more interesting is that the <code>Child</code> also has attributes specific to itself, namely the <code>happinessMeter</code> and the ability to <code>play()</code>.<h2 id="header-3"><span class="section-number">3</span>Polymorphism</h2>
+<p>Polymorphism is the ability to associate the same symbol with different actions depending on its context. This allows for the generalisation of actions within code. Below is an example of polymorphism.</p>
+<pre class="prettyprint"><code class="language-java">  public class Human {
+      private String name;
+      private Calendar birthDate;
+      private boolean rested;
+
+      public Human(String name, Calendar birthDate) {
+          this.name = name;
+          this.birthDate = birthDate;
+          rested = false;
+      }
+
+      public void idle(double hours) {
+          if(hours &#62;= 1)
+              rested = true;
+      }
+
+
+      public boolean isRested() {
+          return rested;
+      }
+  }
+
+  public class Parent extends Human{
+      private double netWorth;
+
+      public Parent(String name, Calendar birthDate) {
+          super(name, birthDate);
+          netWorth = 0;
+      }
+
+      public void work(double hours) {
+          netWorth += 14 * hours;
+      }
+  }
+
+  public class Child extends Parent {
+      private double happinessMeter;
+
+      public Child(String name, Calendar birthDate) {
+          super(name, birthDate);
+          happinessMeter = 0;
+      }
+
+      public void play(double hours) {
+          happinessMeter += 1.75 * hours;
+      }
+
+      @Override
+      public void idle(double hours) {
+          happinessMeter -= 0.5 * hours;
+      }
+  }
+
+  public class Driver {
+      public static void main(String[] args) {
+          Human[] humans = {
+              new Human(&#34;A&#34;, new GregorianCalendar(2000, 10, 18)),
+              new Child(&#34;B&#34;, new GregorianCalendar(2010, 5, 23))
+          };
+          for(int i = 0; i &#60; humans.length; i++) {
+              humans[i].idle(2.5);
+              System.out.println(humans[i].isRested());
+          }
+      }
+  }</code>
+</pre>
+In the example above, a <code>Human</code> class is created with an <code>idle()</code> method. An inheritor of the <code>Human</code> class, <code>Child</code>, changes the behaviour of the method. When an array <code>humans</code> is created, it contains both a <code>Human</code> and a <code>Child</code> (an instance of polymorphism). When <code>idle()</code> is called on each object in the array, the method does something different for both the <code>Human</code> and the <code>Child</code> (another instance of polymorphism). </div>
+    </div>
+  </body>
+</html>

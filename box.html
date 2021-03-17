@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Harit Kapadia: Box Creator</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            h1 {
+                margin-bottom: 0;
+            }
+
+            header {
+                margin-bottom: 24px;
+            }
+
+            header > h1 {
+                margin-bottom: 0;
+            }
+
+            header > p {
+                margin-top: 0;
+            }
+
+            label {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 12px;
+            }
+
+            #box {
+                margin-top: 24px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Harit Kapadia's Box Creator</h1>
+            <p>Email: <a href="mailto:h3kapadi@uwaterloo.ca">h3kapadi@uwaterloo.ca</a></p>
+        </header>
+
+        <main>
+            <p>Enter the color and size of your box below. You can also try the following.</p>
+
+            <ul>
+                <li>Select the "Update box automatically" box.</li>
+                <li>Enter values outside RGB range.</li>
+                <li>Enter decimal values for size.</li>
+                <li>Enter non-numeric values for any field.</li>
+                <li>View the page source for comments.</li>
+            </ul>
+
+            <div>
+                <div id="color">
+                    <div id="colorform">
+                        <h2>Color</h2>
+                        <label>
+                            Red
+                            <span><input id="r" type="number" value="0"></span>
+                        </label>
+                        <label>
+                            Green
+                            <span><input id="g" type="number" value="0"></span>
+                        </label>
+                        <label>
+                            Blue
+                            <span><input id="b" type="number" value="0"></span>
+                        </label>
+                    </div>
+                </div>
+                <div id="sizeform">
+                    <h2>Size</h2>
+                    <label>
+                        Width
+                        <span>
+                            <input id="width" type="text" pattern="^\d*\.?\d+$" value="1">
+                            <select id="widthunit">
+                                <option value="cm" selected="selected">cm</option>
+                                <option value="in">in</option>
+                                <option value="px">px</option>
+                            </select>
+                        </span>
+                    </label>
+                    <label>
+                        Height
+                        <span>
+                            <input id="height" type="text" pattern="^\d*\.?\d+$" value="1">
+                            <select id="heightunit">
+                                <option value="cm" selected="selected">cm</option>
+                                <option value="in">in</option>
+                                <option value="px">px</option>
+                            </select>
+                        </span>
+                    </label>
+                </div>
+                <label>
+                    <span><input id="automatic" type="checkbox">Update box automatically</span>
+                </label>
+                <button type="submit" onclick="updatebox();">Make my box!</button>
+            </div>
+            <div id="box" />
+        </main>
+
+        <script>
+            // Utility functions
+            const lower = (min) => (v) => (v < min) ? min : v;
+            const upper = (max) => (v) => (v > max) ? max : v;
+            const clamp = (min, max) => (v) => upper(max)(lower(min)(v));
+            const isNumber = (v) => (/\d+/).test(v);
+
+            // Form items used to get values
+            const items = [
+                "r", "g", "b", "width", "height", "widthunit", "heightunit"
+            ].map((e) => document.querySelector(`#${e}`));
+
+            // Updates CSS of #box div with values from DOM elements in `items`
+            const updatebox = () => {
+                const [
+                    r, g, b, width, height, widthunit, heightunit
+                ] = items.map((e) => e.value);
+
+                const box = document.querySelector("#box");
+                box.style.width = `${width}${widthunit}`;
+                box.style.height = `${height}${heightunit}`;
+                box.style.backgroundColor = `rgb(${r},${g},${b})`;
+            }
+            // We want the box to display immediately
+            updatebox();
+
+            // Toggle automatic updates
+            document.querySelector("#automatic").addEventListener("change", (event) => {
+                if(event.target.checked)
+                    items.forEach((e) => e.addEventListener("change", updatebox));
+                else
+                    items.forEach((e) => e.removeEventListener("change", updatebox));
+            });
+
+            // User validation
+            // r, g, b values are only valid when integers between 0 and 255
+            items.slice(0, 3).forEach(e => e.addEventListener("change", (event) => {
+                if((/^\d+$/).test(event.target.value))
+                    event.target.value = clamp(0, 255)(parseInt(event.target.value));
+            }));
+            // width, height values are only useful when positive
+            items.slice(3, 5).forEach(e => e.addEventListener("change", (event) => {
+                if((/^\d*\.?\d+$/).test(event.target.value))
+                    event.target.value = lower(1)(parseFloat(event.target.value));
+            }));
+        </script>
+    </body>
+</html>

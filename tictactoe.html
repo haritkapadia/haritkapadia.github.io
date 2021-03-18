@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Harit Kapadia: Tic-Tac-Toe</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            h1 {
+                margin-bottom: 0;
+            }
+
+            header {
+                margin-bottom: 24px;
+            }
+
+            header > h1 {
+                margin-bottom: 0;
+            }
+
+            header > p {
+                margin-top: 0;
+            }
+
+            label {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 12px;
+            }
+
+            #box {
+                margin-top: 24px;
+            }
+
+            .cell {
+                border: 1px solid black;
+                width: 96px;
+                height: 96px;
+                text-align: center;
+                font-size: 48px;
+                font-family: sans-serif;
+            }
+
+            .win {
+                font-size: 48px;
+            }
+
+            .hidden {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Harit Kapadia's Tic-Tac-Toe Game</h1>
+            <p>Email: <a href="mailto:h3kapadi@uwaterloo.ca">h3kapadi@uwaterloo.ca</a></p>
+        </header>
+
+        <main>
+            <p>Press any tile on the Tic-Tac-Toe board to begin.</p>
+
+            <p>You can try the following.</p>
+
+            <ul>
+                <li>Letting "X" win.</li>
+                <li>Letting "O" win.</li>
+                <li>Making a tie.</li>
+                <li>Downloading this page source and changing the board size.</li>
+            </ul>
+
+            <div id="p0w" class="hidden">This is a tie!</div>
+            <div id="p1w" class="hidden">Player 1 wins!</div>
+            <div id="p2w" class="hidden">Player 2 wins!</div>
+
+            <div id="tictactoe" />
+        </main>
+
+        <script>
+            // Board size is any positive integer, try changing it!
+            const BOARD_SIZE = 3;
+
+            // Gets containing div, styles as grid of BOARD_SIZE by BOARD_SIZE, and populates cells
+            const boardDOM = document.querySelector("#tictactoe");
+            boardDOM.style.cssText += ";" + `
+display: grid;
+grid-template-columns: repeat(${BOARD_SIZE}, 96px);
+            `;
+
+            // TicTacToe cells, represented as a flattened array
+            const cells = new Array(BOARD_SIZE * BOARD_SIZE);
+            for(let i = 0; i < cells.length; i += 1)
+                cells[i] = document.createElement("div");
+            cells.forEach(cell => {
+                cell.setAttribute("class", "cell");
+                boardDOM.append(cell);
+            });
+
+            // Useful constants representing board state
+            const EMPTY = 0;
+            const X = 1;
+            const O = 2;
+            // Indexing into a flat array of size BOARD_SIZE by BOARD_SIZE
+            const index = (flatArray, i, j) => flatArray[i * BOARD_SIZE + j];
+
+            // New Type "State": { [[Integer]], Integer }
+
+            // The state of the game contains a list of moves made and the current player.
+            // Keeping a list of moves allows us to extend the game to show move history or add an undo feature.
+
+            // update: integer, State -> State
+            // Creates a new state based on which cell the player clicks
+            const update = (idx, { moves, player }) => {
+                if(moves.length > 0) {
+                    // Check for invalid moves
+                    const lastMove = moves[moves.length - 1];
+                    if(lastMove[idx] != EMPTY)
+                        return state;
+                    return {
+                        moves: moves.concat([lastMove.map((e, i) => i == idx ? player : e)]),
+                        player: player == X ? O : X
+                    };
+                }
+                // First move is special, must populate with empty arrays
+                return {
+                    moves: [cells.map((_, i) => i == idx ? player : EMPTY)],
+                    player: player == X ? O : X
+                };
+            };
+
+            // won: State -> boolean
+            // Checks if the board is in a won state.
+            const won = ({ moves }) => {
+                const lastMove = moves[moves.length - 1];
+                // Search vertically
+                for(let row = 0; row < BOARD_SIZE; row += 1) {
+                    let winner = true;
+                    for(let col = 1; col < BOARD_SIZE; col += 1) {
+                        const testCell = index(lastMove, row, 0);
+                        if(testCell == EMPTY || testCell != index(lastMove, row, col)) {
+                            winner = false;
+                            break;
+                        }
+                    }
+                    if(winner) {
+                        return true;
+                    }
+                }
+                // Search horizontally
+                for(let col = 0; col < BOARD_SIZE; col += 1) {
+                    let winner = true;
+                    for(let row = 1; row < BOARD_SIZE; row += 1) {
+                        const testCell = index(lastMove, 0, col);
+                        if(testCell == EMPTY || testCell != index(lastMove, row, col)) {
+                            winner = false;
+                            break;
+                        }
+                    }
+                    if(winner)
+                        return true;
+                }
+                // Search diagonally
+                {
+                    let winner = true;
+                    for(let d = 1; d < BOARD_SIZE; d += 1) {
+                        const testCell = index(lastMove, 0, 0);
+                        if(testCell == EMPTY || testCell != index(lastMove, d, d)) {
+                            winner = false;
+                            break;
+                        }
+                    }
+                    if(winner)
+                        return true;
+                    for(let d = 1; d < BOARD_SIZE; d += 1) {
+                        const testCell = index(lastMove, 0, BOARD_SIZE - 1);
+                        if(testCell == EMPTY || testCell != index(lastMove, d, BOARD_SIZE - 1 - d)) {
+                            winner = false;
+                            break;
+                        }
+                    }
+                    if(winner)
+                        return true;
+                }
+                return false;
+            };
+
+            // draw: [integer] -> undefined
+            // Draws the contents of a move into the cells
+            const draw = (move) => cells.forEach((cell, i) => {
+                if(move[i] == EMPTY)
+                    cell.textContent = "";
+                else if(move[i] == X)
+                    cell.textContent = "X";
+                else
+                    cell.textContent = "O";
+            });
+
+            // showWin: integer -> undefined
+            // Unhides the correct win text based on the provided winner. 0 represents a tie.
+            const showWin = (winner) => {
+                let el;
+                if(winner == EMPTY)
+                    el = document.querySelector("#p0w");
+                if(winner == X)
+                    el = document.querySelector("#p1w");
+                if(winner == O)
+                    el = document.querySelector("#p2w");
+                el.setAttribute("class", "win");
+            }
+
+            // clearWin: () -> undefined
+            // Hides all win text.
+            const clearWin = () => {
+                let el;
+                el = document.querySelector("#p0w");
+                el.setAttribute("class", "hidden");
+                el = document.querySelector("#p1w");
+                el.setAttribute("class", "hidden");
+                el = document.querySelector("#p2w");
+                el.setAttribute("class", "hidden");
+            };
+
+            // Of type State, see above for description
+            let state = {
+                moves: [],
+                player: X
+            };
+
+            // Each cell triggers the game to update
+            cells.forEach((cell, idx) => cell.addEventListener("click", (event) => {
+                // Clear win text on new game
+                if(state.moves.length == 0)
+                    clearWin();
+
+                const lastPlayer = state.player;
+                state = update(idx, state);
+
+                // Check if the game is over
+                let reset = false;
+                if(won(state)) {
+                    showWin(lastPlayer);
+                    reset = true;
+                } else if(!state.moves[state.moves.length - 1].some(e => e == EMPTY)) {
+                    // Tied state, no more moves available
+                    showWin(EMPTY);
+                    reset = true;
+                }
+
+                draw(state.moves[state.moves.length - 1]);
+                if(reset)
+                    state = {
+                        moves: [],
+                        player: X
+                    };
+            }));
+        </script>
+    </body>
+</html>

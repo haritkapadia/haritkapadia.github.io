@@ -1834,8 +1834,8 @@ code {
     grid-auto-rows: min-content;
   }
 
-  .lg\:grid-cols-\[1fr_130ch_1fr\] {
-    grid-template-columns: 1fr 130ch 1fr;
+  .lg\:grid-cols-\[1fr_100ch_1fr\] {
+    grid-template-columns: 1fr 100ch 1fr;
   }
 
   .lg\:grid-cols-2 {
@@ -1844,6 +1844,10 @@ code {
 
   .lg\:grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-\[1fr_130ch_1fr\] {
+    grid-template-columns: 1fr 130ch 1fr;
   }
 
   .lg\:gap-8 {

@@ -940,19 +940,10 @@ video {
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 }
-@media not all and (min-width: 640px) {
+@media not all and (min-width: 768px) {
 
-  .max-sm\:block {
+  .max-md\:block {
     display: block;
-  }
-
-  .max-sm\:text-3xl {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-
-  .max-sm\:\[container-type\:normal\] {
-    container-type: normal;
   }
 }
 @media (min-width: 768px) {
@@ -975,6 +966,10 @@ video {
 
   .md\:block {
     display: block;
+  }
+
+  .md\:grid-cols-\[auto_auto\] {
+    grid-template-columns: auto auto;
   }
 
   .md\:grid-rows-\[auto_1fr\] {

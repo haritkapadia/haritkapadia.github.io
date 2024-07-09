@@ -1048,7 +1048,7 @@ networks:
 		 		data.delivery_order as "Order",
 		 		status.order_time AS "Ordered at",
 		 		status.status AS "Status",
-		 		data.customer AS "C#",
+		 		customer.name AS "Customer",
 		 		data.address AS "Address",
 		 		data.depart AS "Depart at",
 		 		data.arrive AS "Arrive by",
@@ -1063,7 +1063,8 @@ networks:
 		 			first_value(status) OVER (PARTITION BY delivery_order ORDER BY time DESC) AS status
 		 		FROM delivery_order_status
 		 	) status
-		 		ON data.delivery_order = status.delivery_order				
+				ON data.delivery_order = status.delivery_order
+		 LEFT JOIN customer ON data.customer = customer.customer
      ORDER BY status.order_time DESC
 		`,pks:[0],formats:[{0:xi,1:Vs,2:Gl,5:Vs,6:Vs,8:xi}]},customers:{query:"SELECT * FROM customer",pks:[0],formats:[{0:xi}]},drivers:{query:`
 			SELECT data.*, status.status FROM driver data
